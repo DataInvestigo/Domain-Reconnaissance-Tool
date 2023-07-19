@@ -2,12 +2,15 @@ import dns.resolver
 import dns.exception
 import dns.rdatatype as rdtypes
 
-def check_dns_records(domain):
+def check_dns_records(domain, record_type=None):
     resolver = dns.resolver.Resolver()
     resolver.timeout = 1
     resolver.lifetime = 1
 
-    record_types = ['A', 'AAAA', 'CNAME', 'MX', 'NS', 'PTR', 'SOA', 'SRV', 'CAA', 'TXT']
+    if record_type:
+        record_types = [record_type.upper()]
+    else:
+        record_types = ['A', 'AAAA', 'CNAME', 'MX', 'NS', 'PTR', 'SOA', 'SRV', 'CAA', 'TXT']
 
     for record_type in record_types:
         try:
@@ -58,5 +61,7 @@ def check_dns_records(domain):
             print(f"Error occurred while resolving {domain}: {str(e)}")
 
 # Example usage
-domain = "cashaa.com"
-check_dns_records(domain)
+if __name__ == "__main__":
+    domain = input("Enter the domain name: ")
+    record_type = input("Enter the DNS record type (optional, leave blank to show all record types): ").upper()
+    check_dns_records(domain, record_type)
