@@ -1,4 +1,5 @@
 import whois
+import ssl
 import socket
 from datetime import datetime
 import requests

@@ -1,6 +1,6 @@
 import socket
-import ssl
 import OpenSSL
+import _ssl as ssl
 import datetime
 import dns.resolver
 import requests
